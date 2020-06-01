@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/DanielTitkov/netology-slowly.svg?branch=master)](https://travis-ci.com/DanielTitkov/netology-slowly)
+
 # netology-slowly
 
 Example project for Netology Golang expert position
