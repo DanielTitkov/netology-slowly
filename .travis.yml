@@ -1,0 +1,11 @@
+language: go
+
+go:
+  - '1.13'
+
+before_script:
+  - make tidy
+
+script:
+  - make lint
+  - make test

@@ -1,0 +1,3 @@
+port: 8080
+shutdownTimeout: 5 # seconds
+maxSlowTimeout: 50 # ms
