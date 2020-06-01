@@ -42,7 +42,7 @@ func NewTimeout(cfg configs.Config) Middleware {
 				}
 				w.Header().Set("Content-­Type", "application/json;charset=utf-8")
 				w.WriteHeader(http.StatusBadRequest)
-				json.NewEncoder(w).Encode(resp)
+				_ = json.NewEncoder(w).Encode(resp)
 			}
 		})
 	}
