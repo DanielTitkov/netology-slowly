@@ -69,6 +69,10 @@ func TestHandleSlowPost(t *testing.T) {
 	testCases := []testCase{
 		{fmt.Sprintf(`{"timeout": %d}`, maxSlowTimeout-d), 200, `{"status":"ok"}`, time.Duration(maxSlowTimeout-d) * time.Millisecond},
 		{fmt.Sprintf(`{"timeout": %d}`, maxSlowTimeout+d), 400, `{"error":"timeout too long"}`, time.Duration(maxSlowTimeout) * time.Millisecond},
+		{`brrbbrbrrrr`, 400, `{"error":"request is invalid"}`, 0},
+		{`{"foo":"bar", "spam":"baz"}`, 200, `{"status":"ok"}`, 0},
+		{`{"timeout": 0}`, 200, `{"status":"ok"}`, 0},
+		{`{"timeout": -1000}`, 200, `{"status":"ok"}`, 0},
 	}
 
 	server := makeServer()

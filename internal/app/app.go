@@ -2,7 +2,6 @@ package app
 
 import (
 	"encoding/json"
-	"log"
 	"net/http"
 	"time"
 
@@ -28,7 +27,13 @@ func (a *App) SlowHandler(w http.ResponseWriter, r *http.Request) {
 	var request api.SlowRequestBody
 	err := decoder.Decode(&request)
 	if err != nil {
-		log.Println("failed to parse request body", err)
+		resp := api.ErrorResponseBody{
+			Error: api.ErrorInvalidRequest,
+		}
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusBadRequest)
+		_ = json.NewEncoder(w).Encode(resp)
+		return
 	}
 
 	time.Sleep(time.Duration(request.Timeout) * time.Millisecond)
@@ -36,6 +41,7 @@ func (a *App) SlowHandler(w http.ResponseWriter, r *http.Request) {
 	resp := api.OkResponseBody{
 		Status: api.OkStatus,
 	}
-	w.Header().Set("Content-­Type", "application/json;charset=utf-8")
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
 	_ = json.NewEncoder(w).Encode(resp)
 }

@@ -4,6 +4,7 @@ package api
 const (
 	OkStatus            = "ok"
 	ErrorTooLongTimeout = "timeout too long"
+	ErrorInvalidRequest = "request is invalid"
 )
 
 // OkResponseBody is used for serializing ok response

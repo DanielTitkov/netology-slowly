@@ -40,7 +40,7 @@ func NewTimeout(cfg configs.Config) Middleware {
 				resp := api.ErrorResponseBody{
 					Error: api.ErrorTooLongTimeout,
 				}
-				w.Header().Set("Content-­Type", "application/json;charset=utf-8")
+				w.Header().Set("Content-Type", "application/json")
 				w.WriteHeader(http.StatusBadRequest)
 				_ = json.NewEncoder(w).Encode(resp)
 			}
